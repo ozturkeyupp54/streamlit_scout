@@ -20,8 +20,8 @@ gearing_type=st.sidebar.radio('Select gear type',('Automatic','Manual','Semi-aut
 car_model=st.sidebar.selectbox("Select model of your car", ('Audi A1', 'Audi A3', 'Opel Astra', 'Opel Corsa', 'Opel Insignia', 'Renault Clio', 'Renault Duster', 'Renault Espace'))
 
 
-richard_model=pickle.load(open("rf_model_new","rb"))
-richard_transformer = pickle.load(open('transformer', 'rb'))
+ozturk_model=pickle.load(open("rf_model_new","rb"))
+ozturk_transformer = pickle.load(open('transformer', 'rb'))
 
 
 my_dict = {
@@ -39,11 +39,11 @@ df = pd.DataFrame.from_dict([my_dict])
 st.header("The configuration of your car is below")
 st.table(df)
 
-df2 = richard_transformer.transform(df)
+df2 = ozturk_transformer.transform(df)
 
 st.subheader("Press predict if configuration is okay")
 
 if st.button("Predict"):
-    prediction = richard_model.predict(df2)
+    prediction = ozturk_model.predict(df2)
     st.success("The estimated price of your car is €{}. ".format(int(prediction[0])))
     
